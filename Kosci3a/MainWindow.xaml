@@ -17,15 +17,17 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Button Content="Roll" Click="rollbtn_Click" 
+                x:Name="rollbtn"
                 Grid.Row="1"/>
         <Button Content="Start"
                 x:Name="startbtn"
                 Grid.Column="2"
+                Click="clearbtn_Click"
                 />
         <Button Content="Zatwierdź"
                 x:Name="zatwierdzbtn"
                 Grid.Column="1"
-                Grid.Row="1"/>
+                Grid.Row="1" Click="zatwierdzbtn_Click"/>
         <TextBlock Text="suma punktów"
                    Grid.Column="2"
                    Grid.Row="1"/>

@@ -24,6 +24,8 @@ namespace Kosci3a
         public ObservableCollection <Dice> results { get; set; }
         public ObservableCollection <Score> scores { get; set; }
         public int NumberOfDice { get; set; }
+        private int NumberOfTries;
+        private int NumberOfTriesW = 3 ;
         public MainWindow()
         {
             InitializeComponent();
@@ -35,6 +37,7 @@ namespace Kosci3a
         }
         private void preparegame()
         {
+            NumberOfTries = NumberOfTriesW;
             scores.Add(new Score("jedynki"));
             scores.Add(new Score("dwójki"));
             scores.Add(new Score("trójki"));
@@ -53,17 +56,41 @@ namespace Kosci3a
             scores.Add(new Score("szansa"));
 
         }
+        private void showPoint()
+        {
+            if(scores[14].IsSet == false)
+            {
+                scores[14].Points = sumAll(results);
+            }
+        }
+
+        private int sumAll(ObservableCollection<Dice> tablica)
+        {
+            int s =0;
+            foreach(Dice d in tablica)
+            {
+                s = s + d.Value;
+            }
+            return s;
+        }
 
         private void rollbtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            var random = new Random();
-            foreach(var item in results)
+            if (NumberOfTries > 0)
             {
-                if (!item.IsSelected)
+                var random = new Random();
+                foreach (var item in results)
                 {
-                    item.Value = random.Next(1,7);
+                    if (!item.IsSelected)
+                    {
+                        item.Value = random.Next(1, 7);
+                    }
                 }
+                NumberOfTries--;
+            }
+            else
+            {
+                rollbtn.IsEnabled = false;
             }
         }
 
@@ -74,6 +101,7 @@ namespace Kosci3a
             {
                 results.Add(new Dice());
             }
+            NumberOfTries = NumberOfTriesW;
         }
 
         private void dicebtn_Click(object sender, RoutedEventArgs e)
@@ -81,6 +109,17 @@ namespace Kosci3a
             var button = sender as Button;
             var dice = button.DataContext as Dice;
             dice.IsSelected = ! dice.IsSelected;
+        }
+
+        private void zatwierdzbtn_Click(object sender, RoutedEventArgs e)
+        {
+            NumberOfTries = NumberOfTriesW;
+            rollbtn.IsEnabled = true;
+            results.Clear();
+            for(int i = 0;i < NumberOfDice; i++)
+            {
+                results.Add(new Dice());
+            }
         }
     }
 }
