@@ -58,18 +58,43 @@ namespace Kosci3a
         }
         private void showPoint()
         {
-            if(scores[14].IsSet == false)
+            for (int i = 0; i < 6; i++)
+            {
+                if (scores[i].IsSet == false)
+                {
+                    scores[i].Points = sumaGorna(results, i+1);
+                }
+            }
+            if (scores[14].IsSet == false)
             {
                 scores[14].Points = sumAll(results);
             }
+            
         }
-
+        private int sumaGorna(ObservableCollection<Dice> tablica, int wartosc)
+        {
+            int s=0;
+            int licznik=0;
+            foreach(Dice dice in tablica)
+            {
+                if (dice.Value == wartosc)
+                {
+                    licznik++;
+                }
+            }
+            s = (licznik - 3) * wartosc;
+            return s;
+        }
         private int sumAll(ObservableCollection<Dice> tablica)
         {
             int s =0;
             foreach(Dice d in tablica)
             {
                 s = s + d.Value;
+            }
+            if (NumberOfTries == NumberOfTriesW - 1)
+            {
+                s = s * 2;
             }
             return s;
         }
