@@ -33,7 +33,7 @@
                 DockPanel.Dock="Bottom" Click="clearbtn_Click"/>
         -->
         <DataGrid Grid.Column="1"
-                  >
+                  ItemsSource="{Binding scores}">
             
         </DataGrid>
         <ItemsControl ItemsSource="{Binding results}">

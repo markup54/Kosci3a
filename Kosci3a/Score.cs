@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace Kosci3a
 {
-    internal class Score
+    public class Score
     {
+        public string Name { get; set; }   
+        public int Points { get; set; }
+        private bool _isSet;
+        public bool IsSet
+        {
+            get { return _isSet; }
+            set { _isSet = value; }
+        }
+
+        public Score(string name)
+        {
+            Name = name;
+            Points = 0;
+            IsSet = false;
+        }
     }
 }

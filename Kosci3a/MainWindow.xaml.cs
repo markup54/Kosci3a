@@ -22,13 +22,36 @@ namespace Kosci3a
     public partial class MainWindow : Window
     {
         public ObservableCollection <Dice> results { get; set; }
+        public ObservableCollection <Score> scores { get; set; }
         public int NumberOfDice { get; set; }
         public MainWindow()
         {
             InitializeComponent();
             NumberOfDice = 10;
             results = new ObservableCollection<Dice>();
+            scores = new ObservableCollection<Score>();
+            preparegame();
             DataContext = this;
+        }
+        private void preparegame()
+        {
+            scores.Add(new Score("jedynki"));
+            scores.Add(new Score("dwójki"));
+            scores.Add(new Score("trójki"));
+            scores.Add(new Score("czwórki"));
+            scores.Add(new Score("piątki"));
+            scores.Add(new Score("szóstki"));
+            
+            scores.Add(new Score("para"));
+            scores.Add(new Score("dwie pary"));
+            scores.Add(new Score("trójka"));
+            scores.Add(new Score("full (2+3)"));
+            scores.Add(new Score("kareta"));
+            scores.Add(new Score("poker"));
+            scores.Add(new Score("mały strit"));
+            scores.Add(new Score("duży strit"));
+            scores.Add(new Score("szansa"));
+
         }
 
         private void rollbtn_Click(object sender, RoutedEventArgs e)
