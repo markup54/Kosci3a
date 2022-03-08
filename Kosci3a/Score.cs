@@ -6,15 +6,26 @@ using System.Threading.Tasks;
 
 namespace Kosci3a
 {
-    public class Score
+    public class Score : NotifyPropertyChanged
     {
-        public string Name { get; set; }   
-        public int Points { get; set; }
+        public string Name { get; set; }
+        private int _points;
+        public int Points
+        {
+            get { return _points; }
+            set
+            {
+                _points = value;
+                OnPropertyChanged();
+            }
+        }
         private bool _isSet;
         public bool IsSet
         {
             get { return _isSet; }
-            set { _isSet = value; }
+            set { _isSet = value;
+                OnPropertyChanged();
+            }
         }
 
         public Score(string name)

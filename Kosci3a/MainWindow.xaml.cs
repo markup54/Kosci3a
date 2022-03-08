@@ -87,6 +87,7 @@ namespace Kosci3a
                     }
                 }
                 NumberOfTries--;
+                showPoint();
             }
             else
             {
