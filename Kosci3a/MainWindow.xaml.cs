@@ -65,6 +65,14 @@ namespace Kosci3a
                     scores[i].Points = sumaGorna(results, i+1);
                 }
             }
+            if (scores[6].IsSet == false)
+            {
+                scores[6].Points = sumPara(results,2);
+            }
+            if (scores[8].IsSet == false)
+            {
+                scores[8].Points = sumPara(results, 3);
+            }
             if (scores[14].IsSet == false)
             {
                 scores[14].Points = sumAll(results);
@@ -83,6 +91,18 @@ namespace Kosci3a
                 }
             }
             s = (licznik - 3) * wartosc;
+            return s;
+        }
+        private int sumPara(ObservableCollection<Dice> tablica,int ile)
+        {
+            int s = 0;
+            for (int i = 6; i > 0; i--)
+            {
+                if(tablica.Count(x=>x.Value==i)>=ile)
+                {
+                    return i * ile;
+                }
+            }
             return s;
         }
         private int sumAll(ObservableCollection<Dice> tablica)
